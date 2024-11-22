@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import *
 # Create your views here.
 def val_login(req):
     if 'user' in req.session:
@@ -43,4 +44,11 @@ def vault(req):
   return render(req,'user/vaultuser.html')
 
 def addfile(req):
-    return render(req,'user/addfile.html')
+    if req.method=='POST':
+        name=req.POST['name']
+        file=req.POST['allfile']
+        data=File.objects.create(name=name,files=file)
+        data.save()
+        return redirect(vault)
+    else:
+       return render(req,'user/addfile.html')
