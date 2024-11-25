@@ -41,13 +41,15 @@ def register(req):
     return render(req,'user/register.html')
 
 def vault(req):
-  return render(req,'user/vaultuser.html')
+    data=User.objects.all()
+    return render(req,'user/vaultuser.html',{'data':data})
 
-def addfile(req):
+def addfile(req,id):
     if req.method=='POST':
+        user=User.objects.get(pk=id)
         name=req.POST['name']
-        file=req.POST['allfile']
-        data=File.objects.create(name=name,files=file)
+        file=req.FILES['allfile']
+        data=File.objects.create(user=user,name=name,files=file)
         data.save()
         return redirect(vault)
     else:

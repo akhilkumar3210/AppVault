@@ -6,6 +6,6 @@ urlpatterns=[
     path('register',views.register),
     path('vault',views.vault),
     path('logout',views.val_logout),
-    path('addfile',views.addfile),
+    path('addfile/<id>',views.addfile),
     
 ]
