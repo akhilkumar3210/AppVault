@@ -44,10 +44,10 @@
     {% for i in data %}
       <div class="col-lg-4">
         <div class="card" style="width:400px">
-          <img class="card-img-top" src="{{i.User.files.url}}" alt="Card image" style="width:100%" height="350px">
+          <img class="card-img-top" src="{{i.files.url}}" alt="Card image" style="width:100%" height="350px">
           <div class="card-body">
             <h4 class="card-title">{{i.name}}</h4>
-            /h4>
+            <a href="../del/{{i.pk}}" class="btn bg-grey">Delete </a><br><br>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
+import os
 # Create your views here.
 def val_login(req):
     if 'user' in req.session:
@@ -41,7 +42,7 @@ def register(req):
     return render(req,'user/register.html')
 
 def vault(req):
-    data=User.objects.all()
+    data=File.objects.filter(user=req.user)
     return render(req,'user/vaultuser.html',{'data':data})
 
 def addfile(req,id):
@@ -54,3 +55,8 @@ def addfile(req,id):
         return redirect(vault)
     else:
        return render(req,'user/addfile.html')
+
+def f_delete(req,id):
+    data=File.objects.get(pk=id)
+    data.delete()
+    return redirect(vault)
